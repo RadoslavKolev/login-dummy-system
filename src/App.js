@@ -37,8 +37,13 @@ function App() {
   return (
     // AuthContext.Provider is a component that we can wrap it around other components
     // Those other components and their descendants will have access to that context
-    <AuthContext.Provider value={{ isLoggedIn: isLoggedIn }}>
-      <MainHeader onLogout={logoutHandler} />
+    <AuthContext.Provider 
+      value={{ 
+        isLoggedIn: isLoggedIn,
+        onLogout: logoutHandler
+      }}
+    >
+      <MainHeader />
       <main>
         {!isLoggedIn && <Login onLogin={loginHandler} />}
         {isLoggedIn && <Home onLogout={logoutHandler} />}
