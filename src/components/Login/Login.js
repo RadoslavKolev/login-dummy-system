@@ -12,12 +12,25 @@ const Login = (props) => {
   const [formIsValid, setFormIsValid] = useState(false);
 
   useEffect(() => {
+    // setTimeout() returns an identifier for the timer that was set
+    // We can use this identifier to clear this timer with "clearTimeout()"
     const identifier = setTimeout(() => {
       setFormIsValid(
         enteredEmail.includes('@') && enteredPassword.trim().length > 6
       );
     }, 500);
 
+     /* 
+      This ensures that when we type quickly into the input fields, 
+      it will call the cleanup function on every keystroke, instead of 
+      checking the validity of the form every time we press a key.
+
+      Whenever the cleanup function runs, we clear the timer that was set
+      before this cleanup function ran, so that when the next side effect 
+      execution is due, we are able to set a new timer.
+      
+      In short terms, we clear the last timer before we set a new one.
+    */
     return () => clearTimeout(identifier);
   }, [enteredEmail, enteredPassword]);
 
