@@ -2,6 +2,7 @@ import React, { useRef, useImperativeHandle } from 'react';
 
 import classes from './Input.module.css';
 
+//! Avoid forwardRef logic 99.99%
 const Input = React.forwardRef((props, ref) => {
   const inputRef = useRef();
 
